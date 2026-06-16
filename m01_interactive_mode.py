@@ -16,6 +16,7 @@ OBJECT_Y = 3;
 # 障碍物
 OBSTACLE_X = 1;
 OBSTACLE_Y = 3;
+
 # 定义状态
 grid_states = [
     (row, column)
@@ -52,7 +53,7 @@ def grid_states_transition(state, action) -> tuple:
 
     Args:
         state (tuple): 当前状态
-        action (_type_): 当前动作
+        action (string): 当前动作
 
     Returns:
         tuple: 下一个状态
