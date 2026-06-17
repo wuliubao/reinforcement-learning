@@ -41,7 +41,7 @@ grid_rewards[OBSTACLE_X][OBSTACLE_Y] = -1
 #  [0, 0, 0, 1]]
 
 # 定义动作
-move_actions = {
+grid_actions = {
     'up': (-1, 0),
     'down': (1, 0),
     'left': (0, -1),
@@ -60,7 +60,7 @@ def grid_states_transition(state, action) -> tuple:
     """
     current_state = state;
     next_state = tuple(one + two for one, two
-                      in zip(state, move_actions[action]))
+                      in zip(state, grid_actions[action]))
     
     if (next_state in grid_states
         and next_state not in obstacle_states):
@@ -78,7 +78,7 @@ def grid_random_policy(state) -> tuple:
     Returns:
         tuple: 下一步动作
     """
-    return random.choice(list(move_actions.keys()))
+    return random.choice(list(grid_actions.keys()))
 
 
 def main() -> int:
@@ -86,10 +86,10 @@ def main() -> int:
     current_state = (1, 1);
 
     for _ in range(5):
-        current_move_action = grid_random_policy(current_state);
-        next_state = grid_states_transition(current_state, current_move_action);
+        current_grid_action = grid_random_policy(current_state);
+        next_state = grid_states_transition(current_state, current_grid_action);
         reward = grid_rewards[next_state[0]][next_state[1]]
-        print(f"当前状态:{current_state}, 当前动作:{current_move_action},\n"
+        print(f"当前状态:{current_state}, 当前动作:{current_grid_action},\n"
               f"下一个状态:{next_state}, 奖励:{reward}")
         current_state = next_state
     
