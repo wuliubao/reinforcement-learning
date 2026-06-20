@@ -1,4 +1,3 @@
-import random
 import sys
 from m01_interactive_mode import *
 
@@ -29,6 +28,7 @@ def grid_value_iteration(counts):
         counts (int): 迭代次数
     """
     for _ in range(counts):
+        #一次迭代做遍历循环，只存储最大价值
         for i in range(GRID_ROW):
             for j in range(GRID_COLUMN):
                 max_value = -float('inf')
