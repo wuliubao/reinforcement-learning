@@ -3,10 +3,10 @@ from m01_interactive_mode import *
 
 #
 # 简单MDP
-# 基于策略: 1.静态奖励 2.价值迭代 3.获取最优策略
+# 基于价值: 1.静态奖励 2.价值迭代
 #
 
-## 定义奖励
+### STEP1 奖励
 grid_rewards = [
     [-0.02 for _ in range(GRID_COLUMN)]
     for _ in range(GRID_ROW)
@@ -15,8 +15,8 @@ grid_rewards[OBJECT_X][OBJECT_Y] = 1
 grid_rewards[OBSTACLE_X][OBSTACLE_Y] = -float('inf')
 
 
-###STEP2
-# 价值函数迭代次数
+###STEP2 价值函数迭代
+# 迭代次数
 ITER_COUNTS = 100
 # 折扣因子
 GAMMA = 0.9
@@ -25,6 +25,7 @@ value_function_table = [
     [0 for _ in range(GRID_COLUMN)]
     for _ in range(GRID_ROW)
 ]
+# 迭代函数
 def grid_value_iteration(counts):
     """价值迭代函数 更新价值函数表
 

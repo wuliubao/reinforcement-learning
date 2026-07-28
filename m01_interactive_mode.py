@@ -4,11 +4,10 @@ import sys
 #
 # 强化学习基本交互模式
 # 交互定义：1.state --> action 2.state + action --> next
-# 基于策略: 1.静态奖励 2.随机策略
+# 过程: 1.静态奖励 2.随机策略
 #
 
 ### STEP1 交互定义：状态/动作/奖励/转移
-
 # 3*4 网格 / 目标点 / 障碍物
 GRID_ROW = 3;
 GRID_COLUMN = 4;
