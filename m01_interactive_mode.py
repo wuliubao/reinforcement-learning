@@ -1,46 +1,45 @@
-### 强化学习基本交互模式
-# 当前状态->当前动作
-# 当前状态+当前动作->下一步状态
-# 策略选择: 1.定义奖励 2.随机策略
-
 import random
 import sys
 
-## 环境定义: 走网格
-# 3*4 网格
+#
+# 强化学习基本交互模式
+# 交互定义：1.state --> action 2.state + action --> next
+# 基于策略: 1.静态奖励 2.随机策略
+#
+
+### STEP1 交互定义：状态/动作/奖励/转移
+
+# 3*4 网格 / 目标点 / 障碍物
 GRID_ROW = 3;
 GRID_COLUMN = 4;
-# 目标点
 OBJECT_X = 2;
 OBJECT_Y = 3;
-# 障碍物
 OBSTACLE_X = 1;
 OBSTACLE_Y = 3;
 
-# 定义状态
+# 初始化状态/特殊状态 
+# [(0, 0), (0, 1), (0, 2), (0, 3),
+#  (1, 0), (1, 1), (1, 2), (1, 3),
+#  (2, 0), (2, 1), (2, 2), (2, 3)]
 grid_states = [
     (row, column)
     for row in range(GRID_ROW)
     for column in range(GRID_COLUMN)
 ]
-# 特殊状态：障碍物
 obstacle_states = [(1,3)];  
-# [(0, 0), (0, 1), (0, 2), (0, 3),
-#  (1, 0), (1, 1), (1, 2), (1, 3),
-#  (2, 0), (2, 1), (2, 2), (2, 3)]
 
-# 定义奖励
+# 奖励定义
+# [[0, 0, 0, 0],
+#  [0, 0, 0, -1],
+#  [0, 0, 0, 1]]
 grid_rewards = [
     [0 for _ in range(GRID_COLUMN)]
     for _ in range(GRID_ROW)
 ]
 grid_rewards[OBJECT_X][OBJECT_Y] = 1
 grid_rewards[OBSTACLE_X][OBSTACLE_Y] = -1
-# [[0, 0, 0, 0],
-#  [0, 0, 0, -1],
-#  [0, 0, 0, 1]]
 
-# 定义动作
+# 动作定义
 grid_actions = {
     'up': (-1, 0),
     'down': (1, 0),
@@ -68,7 +67,7 @@ def grid_states_transition(state, action) -> tuple:
     
     return current_state;
 
-
+### STEP2 无模型/基于策略：随机策略
 def grid_random_policy(state) -> tuple:
     """简单的随机策略，返回当前状态下的下一步动作
 
@@ -81,6 +80,7 @@ def grid_random_policy(state) -> tuple:
     return random.choice(list(grid_actions.keys()))
 
 
+### MAIN
 def main() -> int:
     print("hello main")
     current_state = (1, 1);
@@ -92,7 +92,6 @@ def main() -> int:
         print(f"当前状态:{current_state}, 当前动作:{current_grid_action},\n"
               f"下一个状态:{next_state}, 奖励:{reward}")
         current_state = next_state
-    
     return 0
 
 if __name__ == "__main__":
